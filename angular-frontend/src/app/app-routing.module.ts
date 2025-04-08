@@ -15,7 +15,7 @@ const routes: Routes = [
   {path: 'register',component: RegisterComponent},
   
   {path: 'task',component: TaskComponent},
-  {path: '', redirectTo: 'task', pathMatch: 'full'},
+  {path: '', redirectTo: 'register', pathMatch: 'full'},
   
 ];
 
