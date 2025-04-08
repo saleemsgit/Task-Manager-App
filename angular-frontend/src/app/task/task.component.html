@@ -1,0 +1,69 @@
+<!-- Add Task Button -->
+<div class="task-adder mb-6">
+  <h2 class="text-2xl font-bold mb-4">➕ Add New Task</h2>
+  <button 
+    (click)="openTaskModal()" 
+    class="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 transition">
+    Add Task
+  </button>
+</div>
+
+<!-- Task Creation Modal (Pop-up) -->
+<div *ngIf="isTaskModalOpen" class="task-modal-overlay fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
+  <div class="modal-content bg-white p-8 rounded-lg shadow-lg w-96">
+    <h2 class="text-2xl font-bold mb-4">➕ Create New Task</h2>
+    <input [(ngModel)]="newTask.title" placeholder="Title" class="w-full p-2 border border-gray-300 rounded-md mb-4" />
+    <input [(ngModel)]="newTask.description" placeholder="Description" class="w-full p-2 border border-gray-300 rounded-md mb-4" />
+    <input [(ngModel)]="newTask.status" placeholder="Status" class="w-full p-2 border border-gray-300 rounded-md mb-6" />
+    <div class="flex justify-between">
+      <button 
+        (click)="addTask()" 
+        class="px-4 py-2 bg-green-500 text-white rounded-lg shadow-md hover:bg-green-600 transition">
+        Submit
+      </button>
+      <button 
+        (click)="closeTaskModal()" 
+        class="px-4 py-2 bg-red-500 text-white rounded-lg shadow-md hover:bg-red-600 transition">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
+
+<hr class="my-6" />
+
+<!-- Existing Task List -->
+<div class="task-container">
+  <h2 class="text-2xl font-bold mb-4">📋 Task List</h2>
+
+  <div *ngIf="tasks.length === 0" class="no-tasks text-center text-gray-500">
+    No tasks found.
+  </div>
+
+  <div *ngFor="let task of tasks" class="task-card bg-white p-4 rounded-lg shadow-lg mb-4">
+    <div class="task-content">
+      <h3 class="text-xl font-semibold mb-2">{{ task.title }}</h3>
+      <p class="text-gray-700 mb-2">{{ task.description }}</p>
+      <p class="text-gray-500 mb-4">Status: {{ task.status }}</p>
+      <p class="text-gray-500"><strong>ID: {{ task.id }}</strong></p> <!-- Show ID -->
+    </div>
+
+    <div class="task-actions mt-4">
+      <button 
+        class="btn view px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition mr-2" 
+        (click)="viewTask(task)">
+        👁️ View
+      </button>
+      <button 
+        class="btn update px-4 py-2 bg-yellow-500 text-white rounded-lg shadow-md hover:bg-yellow-600 transition mr-2" 
+        (click)="updateTask(task)">
+        ✏️ Update
+      </button>
+      <button 
+        class="btn delete px-4 py-2 bg-red-500 text-white rounded-lg shadow-md hover:bg-red-600 transition" 
+        (click)="deleteTask(task.id)">
+        🗑️ Delete
+      </button>
+    </div>
+  </div>
+</div>
